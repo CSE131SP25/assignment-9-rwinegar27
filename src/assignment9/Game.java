@@ -36,19 +36,19 @@ public class Game {
 			
 			if (!snake.isInbounds()) {
 				StdDraw.clear(StdDraw.DARK_GRAY);
-				StdDraw.setPenColor(StdDraw.RED); //game over message window
-				StdDraw.filledRectangle(0.5, 0.5, 0.4, 0.2); //game over window
+				StdDraw.setPenColor(200, 100, 200);
+				StdDraw.filledRectangle(0.5, 0.5, 0.4, 0.2);
 				
-				StdDraw.setPenColor(StdDraw.BLACK); //border color
-				StdDraw.setPenRadius(0.005); //border thickness
+				StdDraw.setPenColor(StdDraw.BLACK);
+				StdDraw.setPenRadius(0.005);
 				StdDraw.rectangle(0.5, 0.5, 0.4, 0.2);
 				
 				Font font = new Font("Times New Roman", Font.BOLD, 50);
 				StdDraw.setFont(font);
-				StdDraw.setPenColor(Color.BLACK);
-				StdDraw.text(0.5, 0.6, "GAME OVER!");
+				StdDraw.setPenColor(StdDraw.BLACK);
+				StdDraw.text(0.5, 0.55, "GAME OVER!");
 				
-				StdDraw.setPenColor(Color.BLACK);
+				StdDraw.setPenColor(StdDraw.BLACK);
 				StdDraw.text(0.5, 0.4, "SCORE: " + foodEaten);
 				
 				StdDraw.show();				
@@ -76,11 +76,12 @@ public class Game {
 	private void updateDrawing() {
 		
 		//display game window
-		StdDraw.clear(StdDraw.LIGHT_GRAY);
+		StdDraw.clear(StdDraw.DARK_GRAY);
 		snake.draw();
 		food.draw();
 		
-		StdDraw.setPenColor(Color.BLACK);
+		StdDraw.setFont();
+		StdDraw.setPenColor(Color.WHITE);
 		StdDraw.text(0.5, 0.96, "Score: " + foodEaten);
 		
 		StdDraw.pause(50);
@@ -89,6 +90,33 @@ public class Game {
 	}
 	
 	public static void main(String[] args) {
+		StdDraw.clear(StdDraw.DARK_GRAY);
+		StdDraw.setPenColor(200, 100, 200);
+		StdDraw.filledRectangle(0.5, 0.5, 0.4, 0.2);
+		
+		StdDraw.setPenColor(StdDraw.BLACK);
+		StdDraw.setPenRadius(0.005);
+		StdDraw.rectangle(0.5, 0.5, 0.4, 0.2);
+		
+		Font font = new Font("Times New Roman", Font.BOLD, 30);
+		StdDraw.setFont(font);
+		StdDraw.setPenColor(StdDraw.BLACK);
+		StdDraw.text(0.5, 0.55, "Welcome to SNAKE!");
+		
+		StdDraw.setPenColor(StdDraw.BLACK);
+		StdDraw.text(0.5, 0.45, "A game of skill...and luck!");
+		
+		StdDraw.picture(0.5, 0.83, "myImage.jpg", 0.2, 0.2);
+		
+		StdDraw.setPenColor(StdDraw.WHITE);
+		StdDraw.text(0.5, 0.2, "Click anywhere to begin");		
+		
+		StdDraw.show();		
+		
+		while (!StdDraw.isMousePressed()) {
+			StdDraw.pause(10);
+		}
+		
 		Game g = new Game();
 		g.play();
 	}

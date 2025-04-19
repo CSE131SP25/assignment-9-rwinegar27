@@ -26,7 +26,7 @@ public class Food {
 	 * Draws the Food
 	 */
 	public void draw() {
-		StdDraw.setPenColor(StdDraw.RED);
+		StdDraw.setPenColor(200, 100, 200);
 		StdDraw.filledSquare(x, y, FOOD_SIZE);
 	}
 	
