@@ -2,6 +2,8 @@ package assignment9;
 
 import java.util.LinkedList;
 
+import edu.princeton.cs.introcs.StdDraw;
+
 public class Snake {
 
 	private static final double SEGMENT_SIZE = 0.02;
@@ -11,7 +13,8 @@ public class Snake {
 	private double deltaY;
 	
 	public Snake() {
-		//FIXME - set up the segments instance variable
+		segments = new LinkedList<>();
+		segments.add(new BodySegment(0.5, 0.5, SEGMENT_SIZE));
 		deltaX = 0;
 		deltaY = 0;
 	}
@@ -37,14 +40,22 @@ public class Snake {
 	 * based on the current direction of travel
 	 */
 	public void move() {
-		//FIXME
+		BodySegment head = segments.getFirst();
+		
+		double newX = head.getX() + deltaX;
+		double newY = head.getY() + deltaY;
+		
+		segments.addFirst(new BodySegment(newX, newY, SEGMENT_SIZE));
+		segments.removeLast();
 	}
 	
 	/**
 	 * Draws the snake by drawing each segment
 	 */
 	public void draw() {
-		//FIXME
+		for (BodySegment segment : segments) {
+			segment.draw();
+		}
 	}
 	
 	/**
@@ -53,7 +64,13 @@ public class Snake {
 	 * @return true if the snake successfully ate the food
 	 */
 	public boolean eatFood(Food f) {
-		//FIXME
+		BodySegment head = segments.getFirst();
+		
+		if (Math.abs(head.getX() - f.getX()) < SEGMENT_SIZE && Math.abs(head.getY() - f.getY()) < SEGMENT_SIZE) {
+			segments.addFirst(new BodySegment(head.getX() + deltaX, head.getY() + deltaY, SEGMENT_SIZE));
+			return true;
+		}
+		
 		return false;
 	}
 	
@@ -62,7 +79,7 @@ public class Snake {
 	 * @return whether or not the head is in the bounds of the window
 	 */
 	public boolean isInbounds() {
-		//FIXME
-		return true;
+		BodySegment head = segments.getFirst();
+		return head.getX() >= 0 && head.getX() <= 1 && head.getY() >= 0 && head.getY() <= 1;
 	}
 }
