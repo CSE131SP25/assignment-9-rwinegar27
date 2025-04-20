@@ -40,13 +40,15 @@ public class Snake {
 	 * based on the current direction of travel
 	 */
 	public void move() {
-		BodySegment head = segments.getFirst();
+		for (int i = segments.size() - 1; i > 0; i--) {
+			BodySegment prev = segments.get(i -1 );
+			segments.set(i, new BodySegment(prev.getX(), prev.getY(), SEGMENT_SIZE));
+		}
 		
+		BodySegment head = segments.getFirst();
 		double newX = head.getX() + deltaX;
 		double newY = head.getY() + deltaY;
-		
-		segments.addFirst(new BodySegment(newX, newY, SEGMENT_SIZE));
-		segments.removeLast();
+		segments.set(0, new BodySegment(newX, newY, SEGMENT_SIZE));
 	}
 	
 	/**
